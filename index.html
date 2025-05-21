@@ -373,6 +373,53 @@
                 animation: none;
                 width: 100%;
             }
+
+            .faq {
+                padding: 5rem 0;
+                background-color: var(--darker);
+            }
+
+            .faq h2 {
+                margin-bottom: 3rem;
+                text-align: center;
+            }
+
+            .faq-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .faq-item {
+                padding: 1.5rem;
+                border: 1px solid rgba(0, 255, 65, 0.2);
+                border-radius: 4px;
+                transition: all 0.3s ease;
+            }
+
+            .faq-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 255, 65, 0.1);
+            }
+
+            .faq-item h3 {
+                color: var(--primary);
+                margin-bottom: 1rem;
+                font-size: 1.2rem;
+            }
+
+            .faq-item p {
+                color: var(--light);
+                line-height: 1.6;
+            }
+
+            @media (min-width: 768px) {
+                .faq-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
         }
         
         @media (max-width: 480px) {
@@ -405,7 +452,7 @@
                 <div class="logo">> rossiCTF</div>
                 <button class="mobile-nav-toggle" id="mobile-nav-toggle">&equiv;</button>
                 <ul class="nav-links" id="nav-links">
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#about">about</a></li>
                 </ul>
             </nav>
         </div>
@@ -417,63 +464,84 @@
             <div class="hero-content">
                 <h1 class="glitch" data-text="rossiCTF">rossiCTF</h1>
                 <h2 class="typewriter">Capture The Flag a squadre interna al rossi</h2>
-                <p>venerdì 30/06/2025 12:30-16:30 \ ex laboratorio di logistica</p>
-                <a href="#register" class="cta-btn">DISCORD</a>
+                <p>venerdì 30/05/2025 12:30-16:30 \ ex laboratorio di logistica</p>
+                <a href="https://discord.gg/TNU7Ys9bQj" class="cta-btn">DISCORD</a>
                 
                 <div class="countdown">
                     <div class="countdown-item">
-                        <div class="countdown-value" id="days">21</div>
-                        <div class="countdown-label">DAYS</div>
+                        <div class="countdown-value" id="days">9</div>
+                        <div class="countdown-label">d</div>
                     </div>
                     <div class="countdown-item">
-                        <div class="countdown-value" id="hours">14</div>
-                        <div class="countdown-label">HOURS</div>
+                        <div class="countdown-value" id="hours">9</div>
+                        <div class="countdown-label">h</div>
                     </div>
                     <div class="countdown-item">
-                        <div class="countdown-value" id="minutes">36</div>
-                        <div class="countdown-label">MINUTES</div>
+                        <div class="countdown-value" id="minutes">9</div>
+                        <div class="countdown-label">m</div>
                     </div>
                     <div class="countdown-item">
-                        <div class="countdown-value" id="seconds">24</div>
-                        <div class="countdown-label">SECONDS</div>
+                        <div class="countdown-value" id="seconds">9</div>
+                        <div class="countdown-label">s</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+
+
+
     <section class="features" id="about">
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2>&lt; faq /&gt;</h2>
+                <div class="faq-grid">
+                    <div class="feature">
+                        <h3>cos'è una CTF?</h3>
+                        <p>una competizione di cybersecurity dove lo scopo è di "rompere" del software per trovare delle flag</p>
+                    </div>
+                    <br>
+                    <div class="feature">
+                        <h3>come, quando e dove?</h3>
+                        <p>squadre da 1 a 3 persone, componenti solo del rossi, iscrizioni tramite discord. 30/05/2025, dalle 12:30 alle 16:30 all'ex laboratorio di logistica</p>
+                    </div>
+                    <br>
+                    <div class="feature">
+                        <h3>cosa devo sapere?</h3>
+                        <p>le challenge sono pensate per essere fattibili da chiunque abbia una base di informatica, non è necessario avere esperienze pregresse per fare un buon punteggio</p>
+                    </div>
+                    <br>
+                    <div class="feature">
+                        <h3>cosa serve?</h3>
+                        <p>un portatile e un caricatore</p>
+                    </div>
+                    <br>
+                    <div class="feature">
+                        <h3>altro?</h3>
+                        <p>altre informazioni più tecniche o specifiche verranno comunicate sul discord</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br><br>
         <div class="container">
-            <h2>&lt; Competition Features /&gt;</h2>
+            <h2>&lt; categorie /&gt;</h2>
             <div class="features-grid">
                 <div class="feature">
-                    <div class="feature-icon">🔐</div>
-                    <h3>Cryptography</h3>
+                    <h3>crypto</h3>
                     <p>Decrypt messages, crack codes, and solve complex cryptographic puzzles designed to test your knowledge of security algorithms.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">🕵️</div>
-                    <h3>Forensics</h3>
-                    <p>Analyze disk images, network packets, and memory dumps to uncover hidden evidence and extract valuable data.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🧩</div>
-                    <h3>Reverse Engineering</h3>
-                    <p>Disassemble binaries, understand how they work, and exploit vulnerabilities to reveal flags and secrets.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Web Exploitation</h3>
+                    <h3>web</h3>
                     <p>Discover and exploit web vulnerabilities including SQLi, XSS, CSRF, and more in realistic web applications.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Binary Exploitation</h3>
+                    <h3>binary</h3>
                     <p>Leverage memory corruption vulnerabilities to gain control of programs and reveal hidden flags.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-icon">🧠</div>
-                    <h3>Misc Challenges</h3>
+                    <h3>misc</h3>
                     <p>Test your problem-solving skills with a variety of unique challenges that don't fit the conventional categories.</p>
                 </div>
             </div>
@@ -483,7 +551,7 @@
     <footer>
         <div class="container">
             <div class="social-links">
-                <a href="#"><i>Discord</i></a>
+                <a href="https://discord.gg/TNU7Ys9bQj"><i>Discord</i></a>
             </div>
         </div>
     </footer>
@@ -535,29 +603,34 @@
         
         setInterval(draw, 30);
         
-        // Countdown timer
         const updateCountdown = () => {
-            const targetDate = new Date();
-            targetDate.setDate(targetDate.getDate() + 21);
-            targetDate.setHours(targetDate.getHours() + 14);
-            targetDate.setMinutes(targetDate.getMinutes() + 36);
-            targetDate.setSeconds(targetDate.getSeconds() + 24);
-            
+            const targetDate = new Date('2025-05-30T12:30:00');
             const currentDate = new Date();
             const totalSeconds = (targetDate - currentDate) / 1000;
-            
+
+            if(totalSeconds <= 0) {
+                document.getElementById('days').innerText = '0';
+                document.getElementById('hours').innerText = '0';
+                document.getElementById('minutes').innerText = '0';
+                document.getElementById('seconds').innerText = '0';
+                return;
+            }
+
             const days = Math.floor(totalSeconds / 3600 / 24);
             const hours = Math.floor(totalSeconds / 3600) % 24;
             const minutes = Math.floor(totalSeconds / 60) % 60;
             const seconds = Math.floor(totalSeconds) % 60;
-            
-            document.getElementById('days').innerText = days;
-            document.getElementById('hours').innerText = hours;
-            document.getElementById('minutes').innerText = minutes;
-            document.getElementById('seconds').innerText = seconds;
+
+            const pad = (n) => n < 10 ? '0' + n : n;
+
+            document.getElementById('days').innerText = pad(days);
+            document.getElementById('hours').innerText = pad(hours);
+            document.getElementById('minutes').innerText = pad(minutes);
+            document.getElementById('seconds').innerText = pad(seconds);
         };
+
+        updateCountdown();
         
-        // Update countdown every second
         setInterval(updateCountdown, 1000);
         
         // Handle window resize for matrix effect
