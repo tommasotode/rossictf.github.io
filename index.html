@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rossiCTF</title>
+    <style>
+        :root {
+            --primary: #00ff41;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #f8f8f8;
+            --accent: #ff2a6d;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .logo::after {
+            content: "_";
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--light);
+        }
+        
+        .nav-links a::before {
+            content: "[";
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: "]";
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover::before, .nav-links a:hover::after {
+            opacity: 1;
+        }
+        
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            width: 100%;
+            z-index: 1;
+        }
+        
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--light);
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            animation: typing 3.5s steps(40, end) forwards;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-btn:hover {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+        
+        .countdown {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .countdown-item {
+            text-align: center;
+        }
+        
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--light);
+        }
+        
+        .features {
+            padding: 5rem 0;
+            background-color: var(--darker);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature {
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 65, 0.1);
+        }
+        
+        .feature h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--light);
+            transform: translateY(-3px);
+        }
+        
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 var(--accent);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-effect 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 var(--primary);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-effect 5s infinite linear alternate-reverse;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes glitch-effect {
+            0% { clip: rect(29px, 9999px, 41px, 0); }
+            5% { clip: rect(91px, 9999px, 93px, 0); }
+            10% { clip: rect(29px, 9999px, 97px, 0); }
+            15% { clip: rect(38px, 9999px, 73px, 0); }
+            20% { clip: rect(4px, 9999px, 53px, 0); }
+            25% { clip: rect(20px, 9999px, 20px, 0); }
+            30% { clip: rect(67px, 9999px, 62px, 0); }
+            35% { clip: rect(69px, 9999px, 9px, 0); }
+            40% { clip: rect(84px, 9999px, 38px, 0); }
+            45% { clip: rect(88px, 9999px, 64px, 0); }
+            50% { clip: rect(33px, 9999px, 73px, 0); }
+            55% { clip: rect(89px, 9999px, 38px, 0); }
+            60% { clip: rect(5px, 9999px, 47px, 0); }
+            65% { clip: rect(31px, 9999px, 48px, 0); }
+            70% { clip: rect(26px, 9999px, 67px, 0); }
+            75% { clip: rect(62px, 9999px, 74px, 0); }
+            80% { clip: rect(51px, 9999px, 81px, 0); }
+            85% { clip: rect(82px, 9999px, 16px, 0); }
+            90% { clip: rect(51px, 9999px, 4px, 0); }
+            95% { clip: rect(19px, 9999px, 92px, 0); }
+            100% { clip: rect(18px, 9999px, 23px, 0); }
+        }
+        
+        /* Mobile navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background-color: var(--darker);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 999;
+                padding: 2rem;
+                transform: translateX(100%);
+                transition: transform 0.3s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            }
+            
+            .nav-links.active {
+                transform: translateX(0);
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 1.5rem 0;
+                font-size: 1.2rem;
+            }
+            
+            .hero {
+                height: auto;
+                padding: 4rem 0;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .countdown-item {
+                width: calc(50% - 1rem);
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature {
+                margin-bottom: 1rem;
+            }
+            
+            .typewriter {
+                white-space: normal;
+                animation: none;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+            
+            .countdown-value {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .feature {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">rossiCTF</div>
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle">&equiv;</button>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#register">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="matrix-bg" id="matrix"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="glitch" data-text="rossiCTF">rossiCTF</h1>
+                <h2 class="typewriter">Test your hacking skills. Capture flags. Win prizes.</h2>
+                <p>A premier cyber security competition for hackers of all skill levels.</p>
+                <a href="#register" class="cta-btn">REGISTER NOW</a>
+                
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">21</div>
+                        <div class="countdown-label">DAYS</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">14</div>
+                        <div class="countdown-label">HOURS</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">36</div>
+                        <div class="countdown-label">MINUTES</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">24</div>
+                        <div class="countdown-label">SECONDS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="about">
+        <div class="container">
+            <h2>&lt; Competition Features /&gt;</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Cryptography</h3>
+                    <p>Decrypt messages, crack codes, and solve complex cryptographic puzzles designed to test your knowledge of security algorithms.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🕵️</div>
+                    <h3>Forensics</h3>
+                    <p>Analyze disk images, network packets, and memory dumps to uncover hidden evidence and extract valuable data.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🧩</div>
+                    <h3>Reverse Engineering</h3>
+                    <p>Disassemble binaries, understand how they work, and exploit vulnerabilities to reveal flags and secrets.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Web Exploitation</h3>
+                    <p>Discover and exploit web vulnerabilities including SQLi, XSS, CSRF, and more in realistic web applications.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Binary Exploitation</h3>
+                    <p>Leverage memory corruption vulnerabilities to gain control of programs and reveal hidden flags.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Misc Challenges</h3>
+                    <p>Test your problem-solving skills with a variety of unique challenges that don't fit the conventional categories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i>Discord</i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Matrix effect for background
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        const matrixBg = document.getElementById('matrix');
+        
+        matrixBg.appendChild(canvas);
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const symbols = '{}[]()<>?!@#$%^&*-+=_\\|:;,./"\'`~';
+        
+        const alphabet = katakana + latin + nums + symbols;
+        
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        
+        const rainDrops = [];
+        
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+        
+        const draw = () => {
+            context.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            
+            context.fillStyle = '#00ff41';
+            context.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                context.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+        
+        setInterval(draw, 30);
+        
+        // Countdown timer
+        const updateCountdown = () => {
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 21);
+            targetDate.setHours(targetDate.getHours() + 14);
+            targetDate.setMinutes(targetDate.getMinutes() + 36);
+            targetDate.setSeconds(targetDate.getSeconds() + 24);
+            
+            const currentDate = new Date();
+            const totalSeconds = (targetDate - currentDate) / 1000;
+            
+            const days = Math.floor(totalSeconds / 3600 / 24);
+            const hours = Math.floor(totalSeconds / 3600) % 24;
+            const minutes = Math.floor(totalSeconds / 60) % 60;
+            const seconds = Math.floor(totalSeconds) % 60;
+            
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        };
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        
+        // Handle window resize for matrix effect
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Mobile Navigation
+        const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            if (navLinks.classList.contains('active')) {
+                mobileNavToggle.innerHTML = '&times;';
+            } else {
+                mobileNavToggle.innerHTML = '&equiv;';
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileNavToggle.innerHTML = '&equiv;';
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            const isClickInsideNav = navLinks.contains(event.target);
+            const isClickOnToggle = mobileNavToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnToggle && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileNavToggle.innerHTML = '&equiv;';
+            }
+        });
+    </script>
+</body>
+</html>
