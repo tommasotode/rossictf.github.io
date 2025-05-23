@@ -722,35 +722,6 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-
-        const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-        const navLinks = document.getElementById('nav-links');
-
-        mobileNavToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            if (navLinks.classList.contains('active')) {
-                mobileNavToggle.innerHTML = '&times;';
-            } else {
-                mobileNavToggle.innerHTML = '&equiv;';
-            }
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileNavToggle.innerHTML = '&equiv;';
-            });
-        });
-
-        document.addEventListener('click', (event) => {
-            const isClickInsideNav = navLinks.contains(event.target);
-            const isClickOnToggle = mobileNavToggle.contains(event.target);
-
-            if (!isClickInsideNav && !isClickOnToggle && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileNavToggle.innerHTML = '&equiv;';
-            }
-        });
     </script>
 </body>
 
